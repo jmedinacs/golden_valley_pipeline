@@ -1,0 +1,71 @@
+# ---- Python virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# ---- Python caches & builds
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+*.log
+build/
+dist/
+*.egg-info/
+
+# ---- Environment & secrets (keep .env.example in repo)
+*.env
+.env.*
+config/*_secrets.yaml
+config/*_private.json
+secrets/
+secrets/**
+
+# ---- Databases and dumps (we'll keep schema.sql instead)
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.sqlite3-journal
+*.psql
+*.pgdump
+*.sql.gz
+
+# ---- Data (TRACK by default)
+# By default we do NOT ignore /data so structure + samples are visible.
+# If you need a private or heavy area, use these folders:
+data/private/
+data/private/**
+data/_scratch/
+data/_scratch/**
+data/output/exports/
+data/output/exports/**
+data/output/tmp/
+data/output/tmp/**
+# Optional: ignore very large intermediate artifacts by extension
+*.parquet
+*.feather
+*.orc
+
+# ---- OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+
+# ---- BI/analytics caches
+*.hyper
+*.tde
+*.twb.autosave
+*.twbx.autosave
+
+# ---- Archives (often large)
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
