@@ -19,6 +19,7 @@ CLIENT_STRUCTURE = [
     "report/company_level_report",
     "report/incomplete_rows",
     "report/employee_level_report",
+    "report/duplication_report",
     "data/mapping",
     "documentation"
     # Add new folders here with proper structure (relative to client folder)

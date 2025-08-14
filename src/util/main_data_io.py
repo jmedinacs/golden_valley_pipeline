@@ -55,7 +55,7 @@ def load_raw_data(client_name: str = "missing_client", filename: str = "missing_
     return df
 
 
-def save_processed_raw_data(df: pd.DataFrame, client_name: str = "missing_client", filename: str = "missing_filename") -> None:
+def save_cleaned_raw_data(df: pd.DataFrame, client_name: str = "missing_client", filename: str = "missing_filename") -> None:
     """
     Saves a cleaned or processed DataFrame to the client's `data/processed` folder.
 
@@ -80,3 +80,78 @@ def save_processed_raw_data(df: pd.DataFrame, client_name: str = "missing_client
     file_path = os.path.join(processed_path, f"{filename}_cleaned.csv")
     df.to_csv(file_path, index=False)
     print(f"{filename}_cleaned.csv saved to processed folder.")
+    
+def load_cleaned_data(client_name: str = "missing_client", filename: str = "missing_filename",
+                      base_path = "../../../data") -> pd.DataFrame:
+    """
+    Loads a cleaned CSV file from the processed data folder for a given client.
+
+    This function assumes the cleaned file is located at:
+    '../../../data/{client_name}/data/processed/{filename}_cleaned.csv'
+
+    Parameters:
+        client_name (str): Name of the client folder (default is "missing_client").
+        filename (str): Name of the cleaned CSV file without extension (default is "missing_filename").
+
+    Returns:
+        pd.DataFrame: Loaded DataFrame from the specified CSV file.
+
+    Raises:
+        FileNotFoundError: If the base path, client folder, or file does not exist.
+    """
+    # Base directory for all data
+    
+    
+    if not os.path.exists(base_path):
+        raise FileNotFoundError(f"Client base path not found: {base_path}")
+    
+    # Client-specific folder
+    client_path = os.path.join(base_path, client_name)
+    if not os.path.exists(client_path):
+        raise FileNotFoundError(f"Client folder not found: {client_path}")
+    
+    # Full path to the cleaned CSV file
+    file_path = os.path.join(client_path, f"data/processed/{filename}_cleaned.csv")
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"Cleaned data file not found: {file_path}")
+    
+    # Read and return the CSV as a DataFrame
+    df = pd.read_csv(file_path)
+    print(f"{filename}_cleaned.csv loaded from the processed folder.")
+    return df
+
+def load_corrected_data(client_name: str = "missing_client", filename: str = "missing_filename",
+                        base_path: str="../../../data") -> pd.DataFrame:
+    """ """
+    
+    if not os.path.exists(base_path):
+        raise FileNotFoundError(f"Client base corrected path not found: {base_path}")
+    
+    # Client-specific folder
+    client_path = os.path.join(base_path, client_name)
+    if not os.path.exists(client_path):
+        raise FileNotFoundError(f"Client folder not found: {client_path}")
+    
+    # Full path to the cleaned CSV file
+    file_path = os.path.join(client_path, f"data/corrected/{filename}_corrected.csv")
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"Cleaned data file not found: {file_path}")
+    
+    # Read and return the CSV as a DataFrame
+    df = pd.read_csv(file_path)
+    print(f"{filename}_corrected.csv loaded from the corrected folder.")
+    return df
+
+def save_aux_report(df: pd.DataFrame, client_name: str="client_name", filename: str="filename")-> None:
+    """ """
+    base_path = "../../data"
+    
+    client_path = os.path.join(base_path,client_name,"report","duplication_report")
+    if not os.path.exists(client_path):
+        raise FileNotFoundError(f"Folder not found: {client_path}")
+    
+    file_path = os.path.join(client_path,f"{filename}_duplication_report.csv")
+    df.to_csv(file_path, index=False)
+    print(f"{filename}_duplication_report.csv saved to duplication_report_folder.")
+    
+    
